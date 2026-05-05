@@ -1,0 +1,35 @@
+# Environment variables - NEVER commit this
+.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Django
+media/
+staticfiles/
+*.sqlite3
+
+# PyCharm
+.idea/
+
+# Node
+node_modules/
+dist/
+.next/
+
+# OS
+.DS_Store
+Thumbs.db
+```
+
+---
+
+### The Workflow
+```
+You have .env locally → app works ✅
+.gitignore ignores .env → GitHub never sees it ✅
+.env.example on GitHub → other devs know what to fill ✅
