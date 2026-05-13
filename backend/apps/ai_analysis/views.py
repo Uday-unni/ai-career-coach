@@ -5,7 +5,7 @@ from rest_framework import status
 from apps.applications.models import JobApplication
 from .models import AIResult
 from .serializers import AIResultSerializer
-from .prompts import resume_analysis_prompt, cover_letter_prompt
+from .prompts import resume_analysis_prompt, cover_letter_prompt,interview_coach_prompt
 from .client import call_gemini, call_gemini_json
 
 
@@ -153,4 +153,70 @@ class AIResultView(APIView):
             return Response(
                 {"error": "No analysis found for this application."},
                 status=status.HTTP_404_NOT_FOUND
+            )
+
+class InterviewCoachView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        application_id = request.data.get('application_id')
+
+        if not application_id:
+            return Response(
+                {"error": "application_id is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            application = JobApplication.objects.get(
+                id=application_id,
+                user=request.user
+            )
+        except JobApplication.DoesNotExist:
+            return Response(
+                {"error": "Application not found."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        try:
+            resume_text = request.user.resume.extracted_text
+            if not resume_text:
+                return Response(
+                    {"error": "Please upload a resume first."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except Exception:
+            return Response(
+                {"error": "Please upload a resume first."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not application.job_description:
+            return Response(
+                {"error": "Please add a job description first."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            prompt = interview_coach_prompt(
+                resume_text,
+                application.job_description,
+                application.company_name,
+                application.job_title
+            )
+            result = call_gemini_json(prompt)
+
+            # Save to AIResult
+            ai_result, created = AIResult.objects.get_or_create(
+                application=application
+            )
+            ai_result.interview_prep = result
+            ai_result.save()
+
+            return Response(result, status=status.HTTP_200_OK)
+
+        except ValueError as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )

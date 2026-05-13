@@ -1,8 +1,13 @@
-# Environment variables - NEVER commit this
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Python
 venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -19,17 +24,23 @@ staticfiles/
 # Node
 node_modules/
 dist/
+build/
 .next/
+
+# Vite
+frontend/dist/
+frontend/.vite/
 
 # OS
 .DS_Store
 Thumbs.db
-```
+desktop.ini
 
----
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-### The Workflow
-```
-You have .env locally → app works ✅
-.gitignore ignores .env → GitHub never sees it ✅
-.env.example on GitHub → other devs know what to fill ✅
+# Coverage
+coverage/
+.nyc_output/

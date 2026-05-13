@@ -12,6 +12,7 @@ class AIResult(models.Model):
     gaps = models.JSONField(default=list)
     suggestions = models.JSONField(default=list)
     cover_letter = models.TextField(blank=True)
+    interview_prep = models.JSONField(default=dict)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
