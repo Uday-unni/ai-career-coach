@@ -29,6 +29,12 @@ function Landing() {
       desc: 'Analyze your GitHub profile against job requirements. Know which projects to highlight.',
       color: '#00FFD1',
     },
+    {
+      number: '04',
+      title: 'Interview Coach',
+      desc: 'Get AI generated interview questions, STAR format answers, company insights, and smart questions to ask. Practice before you walk in.',
+      color: '#F59E0B',
+    },
   ];
 
   const scrollToSection = (id) => {
@@ -358,7 +364,7 @@ function Landing() {
               fontFamily: 'Inter, sans-serif',
             }}
           >
-            AI-powered resume analysis, cover letter generation, and GitHub profiling.
+            AI-powered resume analysis,Cover letter generation,Interview prepration and GitHub profiling.
           </motion.p>
 
           <motion.div
@@ -437,7 +443,7 @@ function Landing() {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
           gap: '20px',
         }}>
           {features.map((f, i) => (

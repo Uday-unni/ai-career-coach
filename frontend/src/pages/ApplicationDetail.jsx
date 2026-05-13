@@ -763,23 +763,50 @@ function ApplicationDetail() {
                 gap: '12px',
               }}>
                 <div>
-                  <h2 style={{
-                    fontFamily: 'Syne, sans-serif',
-                    fontWeight: '700',
-                    fontSize: '18px',
-                    color: '#FFFFFF',
-                    marginBottom: '4px',
-                  }}>
-                    Interview Coach
-                  </h2>
+                <h2 style={{
+                  fontFamily: 'Syne, sans-serif',
+                  fontWeight: '700',
+                  fontSize: '18px',
+                  color: '#FFFFFF',
+                  marginBottom: '4px',
+                }}>
+                  Interview Coach
+                </h2>
+                <p style={{
+                  color: '#444',
+                  fontSize: '13px',
+                  fontFamily: 'Inter, sans-serif',
+                  marginBottom: '6px',
+                }}>
+                  AI generated interview prep based on your resume
+                </p>
+                {/* Disclaimer */}
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(245,158,11,0.06)',
+                  border: '1px solid rgba(245,158,11,0.15)',
+                  borderRadius: '6px',
+                  padding: '4px 10px',
+                }}>
+                  <div style={{
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    background: '#F59E0B',
+                    flexShrink: 0,
+                  }} />
                   <p style={{
-                    color: '#444',
-                    fontSize: '13px',
+                    color: '#F59E0B',
+                    fontSize: '11px',
                     fontFamily: 'Inter, sans-serif',
+                    fontWeight: '500',
                   }}>
-                    AI generated interview prep based on your resume
+                    AI generated — use as a guide, not a guarantee
                   </p>
                 </div>
+              </div>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
