@@ -71,16 +71,24 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "jobcoach",
-        "USER": "postgres",
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "5432",
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            conn_max_age=600,
+            ssl_require=not DEBUG,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "jobcoach",
+            "USER": "postgres",
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
 
 # Custom user model
 AUTH_USER_MODEL = "users.User"
@@ -151,8 +159,3 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-
-if os.getenv('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.parse(
-        os.getenv('DATABASE_URL')
-    )
