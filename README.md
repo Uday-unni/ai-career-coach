@@ -212,7 +212,24 @@ rezumi/
 
 ## Screenshots
 
-> Coming soon after deployment
+## Screenshots
+
+### Landing Page
+![Rezumi Landing Page](screenshots/landingpage1.png)
+![Rezumi Landing Page](screenshots/landingpage2.png)
+
+### Dashboard
+![Rezumi Dashboard](screenshots/Dashboard.png)
+
+### AI Resume Analysis
+![Rezumi AI Analysis](screenshots/Analyze.png)
+
+### GitHub Scanner
+![Rezumi GitHub Scanner](screenshots/Githubscan.png)
+
+### Interview Coach
+![Rezumi Interview Coach](screenshots/InterviewCoach.png)
+
 
 ---
 
