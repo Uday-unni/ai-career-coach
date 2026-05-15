@@ -7,7 +7,7 @@
 *Land your dream job faster with AI-powered resume analysis,
 cover letter generation, GitHub profile scanning, and interview preparation.*
 
-[Live Demo](#) · [Report Bug](#) · [Request Feature](#)
+[Live Demo](https://rezumi-topaz.vercel.app) · [Report Bug](#) · [Request Feature](#)
 
 </div>
 
@@ -25,9 +25,9 @@ and prepares candidates for interviews — all in one place.
 ## Features
 
 ### AI Resume Analyzer
-Upload your PDF resume and paste a job description. Rezumi uses Google
-Gemini AI to calculate a match score, identify skill gaps, highlight
-strengths, and provide actionable improvement suggestions.
+Upload your PDF resume and paste a job description. Rezumi uses Groq AI
+to calculate a match score, identify skill gaps, highlight strengths,
+and provide actionable improvement suggestions.
 
 ### Cover Letter Generator
 Generate personalized, professional cover letters in seconds. Each letter
@@ -64,7 +64,7 @@ descriptions, locations, and notes. Never lose track of where you applied.
 | Django REST Framework | REST API |
 | PostgreSQL | Database |
 | SimpleJWT | Authentication |
-| Google Gemini AI | AI analysis |
+| Groq AI | AI analysis |
 | PyMuPDF | PDF text extraction |
 | Celery + Redis | Background tasks |
 
@@ -141,13 +141,13 @@ Create a `.env` file in the `backend/` folder:
 DEBUG=True
 SECRET_KEY=your-secret-key-here
 DB_PASSWORD=your-postgresql-password
-GEMINI_API_KEY=your-google-gemini-api-key
+GROQ_API_KEY=your-groq-api-key
 REDIS_URL=redis://localhost:6379/0
 ALLOWED_HOSTS=localhost,127.0.0.1
 CORS_ALLOWED_ORIGINS=http://localhost:5173
 ```
 
-Get your free Gemini API key at [aistudio.google.com](https://aistudio.google.com)
+Get your free Groq API key at [console.groq.com](https://console.groq.com)
 
 ---
 
@@ -254,6 +254,6 @@ Project Link: [https://github.com/Uday-unni/ai-career-coach](https://github.com/
 
 <div align="center">
 
-Built with Django, React, and Google Gemini AI
+Built with Django, React, and Groq AI
 
 </div>
