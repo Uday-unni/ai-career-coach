@@ -47,7 +47,7 @@ class GithubScanView(APIView):
             prompt = github_analysis_prompt(repos, job.job_description)
             result = call_gemini_json(prompt)
 
-            # 3. Save to database ← this was missing!
+
             scan = GithubScan.objects.create(
                 user=request.user,
                 github_username=github_username,
@@ -59,7 +59,7 @@ class GithubScanView(APIView):
                 suggestions=result.get('suggestions', [])
             )
 
-            # 4. Return response ← this was missing!
+
             return Response(
                 GithubScanSerializer(scan).data,
                 status=status.HTTP_201_CREATED
