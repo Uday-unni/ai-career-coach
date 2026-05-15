@@ -153,7 +153,7 @@ CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "UTC"
 
 # Gemini AI
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # Default primary key
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

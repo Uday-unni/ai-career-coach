@@ -1,38 +1,36 @@
-from google import genai
+from groq import Groq
 import os
 import json
 
-# Create client
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
 def call_gemini(prompt):
     try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=2000,
         )
-        return response.text
+        return response.choices[0].message.content
     except Exception as e:
-        raise ValueError(f"Gemini API error: {str(e)}")
+        raise ValueError(f"AI API error: {str(e)}")
 
 
 def call_gemini_json(prompt):
     try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=2000,
         )
-        text = response.text
-
-        # Clean response in case Gemini adds markdown
+        text = response.choices[0].message.content
         text = text.strip()
         text = text.replace("```json", "")
         text = text.replace("```", "")
         text = text.strip()
-
         return json.loads(text)
     except json.JSONDecodeError:
-        raise ValueError("Gemini did not return valid JSON")
+        raise ValueError("AI did not return valid JSON")
     except Exception as e:
-        raise ValueError(f"Gemini API error: {str(e)}")
+        raise ValueError(f"AI API error: {str(e)}")
