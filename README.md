@@ -215,8 +215,8 @@ rezumi/
 ## Screenshots
 
 ### Landing Page
-![Rezumi Landing Page](screenshots/landingpage1.png)
-![Rezumi Landing Page](screenshots/landingpage2.png)
+![Rezumi Landing Page](screenshots/Landingpage1.png)
+![Rezumi Landing Page](screenshots/Landingpage2.png)
 
 ### Dashboard
 ![Rezumi Dashboard](screenshots/Dashboard.png)
@@ -225,7 +225,7 @@ rezumi/
 ![Rezumi AI Analysis](screenshots/Analyze.png)
 
 ### GitHub Scanner
-![Rezumi GitHub Scanner](screenshots/Githubscan.png)
+![Rezumi GitHub Scanner](screenshots/GithubScan.png)
 
 ### Interview Coach
 ![Rezumi Interview Coach](screenshots/InterviewCoach.png)
