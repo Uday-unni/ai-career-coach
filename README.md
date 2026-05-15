@@ -64,7 +64,7 @@ descriptions, locations, and notes. Never lose track of where you applied.
 | Django REST Framework | REST API |
 | PostgreSQL | Database |
 | SimpleJWT | Authentication |
-| Google Gemini AI | AI analysis |
+| Groq AI | AI analysis |
 | PyMuPDF | PDF text extraction |
 | Celery + Redis | Background tasks |
 
