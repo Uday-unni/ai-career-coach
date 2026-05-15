@@ -7,7 +7,7 @@
 *Land your dream job faster with AI-powered resume analysis,
 cover letter generation, GitHub profile scanning, and interview preparation.*
 
-[Live Demo](#) · [Report Bug](#) · [Request Feature](#)
+[Live Demo](https://rezumi-topaz.vercel.app) · [Report Bug](#) · [Request Feature](#)
 
 </div>
 
