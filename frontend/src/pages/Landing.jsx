@@ -577,7 +577,7 @@ function Landing() {
         fontSize: '14px',
         fontFamily: 'Inter, sans-serif',
       }}>
-        Built with Django, React, and Google Gemini AI
+        Built with Django, React, and Groq AI
       </div>
     </div>
   );
