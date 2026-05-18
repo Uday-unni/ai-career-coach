@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     'cloudinary_storage',
     "django.contrib.staticfiles",
-    "cloudinary"
+    "cloudinary",
 
     # Third party
     "rest_framework",
