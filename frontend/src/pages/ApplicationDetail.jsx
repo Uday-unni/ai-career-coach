@@ -341,6 +341,37 @@ function ApplicationDetail() {
                   {loading ? 'Analyzing...' : 'Analyze Resume'}
                 </motion.button>
               </div>
+              {/* AI Precaution */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '10px',
+                background: 'rgba(245,158,11,0.04)',
+                border: '1px solid rgba(245,158,11,0.1)',
+                borderRadius: '10px',
+                padding: '12px 16px',
+                marginBottom: '24px',
+              }}>
+                <div style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#F59E0B',
+                  flexShrink: 0,
+                  marginTop: '6px',
+                }} />
+                <p style={{
+                  color: '#888',
+                  fontSize: '12px',
+                  fontFamily: 'Inter, sans-serif',
+                  lineHeight: '1.6',
+                }}>
+                  <span style={{ color: '#F59E0B', fontWeight: '600' }}>AI Generated — </span>
+                  Results are AI generated and may not be 100% accurate.
+                  Use as a guide to improve your resume, not as a guarantee
+                  of interview success. Always review suggestions carefully.
+                </p>
+              </div>
 
               {!aiResult && !loading && (
                 <div style={{ textAlign: 'center', padding: '48px 0' }}>
@@ -412,6 +443,181 @@ function ApplicationDetail() {
                             : 'Low match — consider upskilling'}
                       </p>
                     </div>
+                  </div>
+                  {/* ATS Score */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '24px',
+                    marginBottom: '32px',
+                    padding: '24px',
+                    background: 'rgba(123,97,255,0.04)',
+                    border: '1px solid rgba(123,97,255,0.1)',
+                    borderRadius: '12px',
+                    flexWrap: 'wrap',
+                  }}>
+                    <div style={{ textAlign: 'center' }}>
+                      <p style={{
+                        color: '#7B61FF',
+                        fontSize: '64px',
+                        fontWeight: '800',
+                        fontFamily: 'Syne, sans-serif',
+                        letterSpacing: '-3px',
+                        lineHeight: 1,
+                      }}>
+                        {aiResult.ats_score}
+                      </p>
+                      <p style={{ color: '#555', fontSize: '12px', fontFamily: 'Inter, sans-serif' }}>
+                        ATS Score
+                      </p>
+                    </div>
+                    <div style={{ flex: 1, minWidth: '200px' }}>
+                      <div style={{
+                        height: '6px',
+                        background: 'rgba(255,255,255,0.06)',
+                        borderRadius: '100px',
+                        overflow: 'hidden',
+                        marginBottom: '8px',
+                      }}>
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: `${aiResult.ats_score}%` }}
+                          transition={{ duration: 1, ease: 'easeOut' }}
+                          style={{
+                            height: '100%',
+                            background: aiResult.ats_score >= 70
+                              ? '#7B61FF'
+                              : aiResult.ats_score >= 40
+                                ? '#F59E0B'
+                                : '#EF4444',
+                            borderRadius: '100px',
+                          }}
+                        />
+                      </div>
+                      <p style={{ color: '#444', fontSize: '12px', fontFamily: 'Inter, sans-serif' }}>
+                        {aiResult.ats_score >= 70
+                          ? 'Good ATS compatibility'
+                          : aiResult.ats_score >= 40
+                            ? 'Moderate ATS compatibility — needs improvement'
+                            : 'Poor ATS compatibility — major fixes needed'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* ATS Keywords */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)',
+                    gap: '16px',
+                    marginBottom: '24px',
+                  }}>
+                    {/* Keywords Found */}
+                    <div style={{
+                      background: 'rgba(0,255,209,0.04)',
+                      border: '1px solid rgba(0,255,209,0.1)',
+                      borderRadius: '12px',
+                      padding: '20px',
+                    }}>
+                      <p style={{
+                        color: '#00FFD1',
+                        fontSize: '11px',
+                        fontWeight: '700',
+                        letterSpacing: '1.5px',
+                        textTransform: 'uppercase',
+                        marginBottom: '16px',
+                        fontFamily: 'Inter, sans-serif',
+                      }}>
+                        Keywords Found
+                      </p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                        {aiResult.ats_keywords_found?.map((keyword, i) => (
+                          <span key={i} style={{
+                            background: 'rgba(0,255,209,0.08)',
+                            border: '1px solid rgba(0,255,209,0.2)',
+                            color: '#00FFD1',
+                            padding: '4px 10px',
+                            borderRadius: '100px',
+                            fontSize: '11px',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: '500',
+                          }}>
+                            {keyword}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Keywords Missing */}
+                    <div style={{
+                      background: 'rgba(239,68,68,0.04)',
+                      border: '1px solid rgba(239,68,68,0.1)',
+                      borderRadius: '12px',
+                      padding: '20px',
+                    }}>
+                      <p style={{
+                        color: '#EF4444',
+                        fontSize: '11px',
+                        fontWeight: '700',
+                        letterSpacing: '1.5px',
+                        textTransform: 'uppercase',
+                        marginBottom: '16px',
+                        fontFamily: 'Inter, sans-serif',
+                      }}>
+                        Keywords Missing
+                      </p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                        {aiResult.ats_keywords_missing?.map((keyword, i) => (
+                          <span key={i} style={{
+                            background: 'rgba(239,68,68,0.08)',
+                            border: '1px solid rgba(239,68,68,0.2)',
+                            color: '#EF4444',
+                            padding: '4px 10px',
+                            borderRadius: '100px',
+                            fontSize: '11px',
+                            fontFamily: 'Inter, sans-serif',
+                            fontWeight: '500',
+                          }}>
+                            {keyword}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ATS Issues */}
+                  <div style={{
+                    background: 'rgba(245,158,11,0.04)',
+                    border: '1px solid rgba(245,158,11,0.1)',
+                    borderRadius: '12px',
+                    padding: '20px',
+                    marginBottom: '24px',
+                  }}>
+                    <p style={{
+                      color: '#F59E0B',
+                      fontSize: '11px',
+                      fontWeight: '700',
+                      letterSpacing: '1.5px',
+                      textTransform: 'uppercase',
+                      marginBottom: '16px',
+                      fontFamily: 'Inter, sans-serif',
+                    }}>
+                      ATS Issues to Fix
+                    </p>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
+                      {aiResult.ats_issues?.map((issue, i) => (
+                        <li key={i} style={{
+                          color: '#888',
+                          fontSize: '13px',
+                          fontFamily: 'Inter, sans-serif',
+                          lineHeight: '1.6',
+                          marginBottom: '8px',
+                          paddingLeft: '12px',
+                          borderLeft: '2px solid rgba(245,158,11,0.3)',
+                        }}>
+                          {issue}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   {/* Results Grid */}

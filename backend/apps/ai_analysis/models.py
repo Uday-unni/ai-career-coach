@@ -8,6 +8,10 @@ class AIResult(models.Model):
         related_name='ai_results'
     )
     match_score = models.IntegerField(default=0)
+    ats_score = models.IntegerField(default=0)
+    ats_issues = models.JSONField(default=list)
+    ats_keywords_found = models.JSONField(default=list)
+    ats_keywords_missing = models.JSONField(default=list)
     strengths = models.JSONField(default=list)
     gaps = models.JSONField(default=list)
     suggestions = models.JSONField(default=list)
