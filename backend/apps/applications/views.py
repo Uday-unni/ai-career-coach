@@ -16,10 +16,29 @@ class JobApplicationListView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        company_name = request.data.get("company_name", "").strip()
+        job_title = request.data.get("job_title", "").strip()
+        job_url = request.data.get("job_url", "").strip()
+
+        existing = JobApplication.objects.filter(
+            user=request.user,
+            company_name__iexact=company_name,
+            job_title__iexact=job_title,
+            job_url=job_url,
+        ).first()
+
+        if existing:
+            return Response(
+                {"error": "This job application already exists."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         serializer = JobApplicationSerializer(data=request.data)
+
         if serializer.is_valid():
-            serializer.save(user=request.user)  # auto set user
+            serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -17,6 +17,7 @@ function Applications() {
   const navigate = useNavigate()
   const { width } = useWindowSize()
   const isMobile = width < 768
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -68,6 +69,27 @@ function Applications() {
     width: '100%',
     outline: 'none',
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      await applicationsApi.create(formData);
+      await fetchApplications();
+      setShowModal(false);
+    } catch (error) {
+      console.error(error);
+      alert(error.response?.data?.error || "Failed to create application.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  
 
   return (
     <>
@@ -365,22 +387,24 @@ function Applications() {
                   </motion.button>
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    disabled={isSubmitting}
+                    whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                     style={{
                       flex: 1,
-                      background: '#C8FF00',
-                      color: '#000',
-                      border: 'none',
-                      padding: '12px',
-                      borderRadius: '10px',
-                      fontSize: '14px',
-                      fontWeight: '700',
-                      cursor: 'pointer',
-                      fontFamily: 'Inter, sans-serif',
+                      background: isSubmitting ? "rgba(200, 255, 0, 0.55)" : "#C8FF00",
+                      color: "#000",
+                      border: "none",
+                      padding: "12px",
+                      borderRadius: "10px",
+                      fontSize: "14px",
+                      fontWeight: "700",
+                      cursor: isSubmitting ? "not-allowed" : "pointer",
+                      fontFamily: "Inter, sans-serif",
+                      opacity: isSubmitting ? 0.75 : 1,
                     }}
                   >
-                    Save
+                    {isSubmitting ? "Saving..." : "Save"}
                   </motion.button>
                 </div>
               </form>
