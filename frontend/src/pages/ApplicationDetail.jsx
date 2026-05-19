@@ -6,6 +6,7 @@ import { aiApi } from '../api/aiApi'
 import { githubApi } from '../api/githubApi'
 import Navbar from '../components/layout/Navbar'
 import useWindowSize from '../hooks/useWindowSize'
+import { deleteApplication } from "../api/applicationsApi";
 
 function ApplicationDetail() {
   const { id } = useParams()
@@ -149,6 +150,22 @@ function ApplicationDetail() {
     </div>
   )
 
+const handleDelete = async (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this application?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await deleteApplication(id);
+    setApplications((prev) => prev.filter((app) => app.id !== id));
+  } catch (error) {
+    console.error(error);
+    alert("Failed to delete application.");
+  }
+};
+
 
   
 
@@ -239,6 +256,19 @@ function ApplicationDetail() {
               </p>
             </div>
           </div>
+          <button
+            onClick={() => handleDelete(app.id)}
+            style={{
+              color: "#ff4d4d",
+              background: "transparent",
+              border: "1px solid rgba(255,255,255,0.15)",
+              padding: "8px 12px",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            Delete
+          </button>
           <span style={{
             ...getStatusStyle(application.status),
             padding: '6px 14px',
