@@ -6,7 +6,7 @@ import { aiApi } from '../api/aiApi'
 import { githubApi } from '../api/githubApi'
 import Navbar from '../components/layout/Navbar'
 import useWindowSize from '../hooks/useWindowSize'
-import { deleteApplication } from "../api/applicationsApi";
+import { Trash2 } from "lucide-react";
 
 function ApplicationDetail() {
   const { id } = useParams()
@@ -150,21 +150,21 @@ function ApplicationDetail() {
     </div>
   )
 
-const handleDelete = async (id) => {
-  const confirmDelete = window.confirm(
-    "Are you sure you want to delete this application?"
-  );
+  const handleDelete = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this application?"
+    );
 
-  if (!confirmDelete) return;
+    if (!confirmed) return;
 
-  try {
-    await deleteApplication(id);
-    setApplications((prev) => prev.filter((app) => app.id !== id));
-  } catch (error) {
-    console.error(error);
-    alert("Failed to delete application.");
-  }
-};
+    try {
+      await applicationsApi.delete(application.id);
+      navigate("/applications");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete application.");
+    }
+  };
 
 
   
@@ -257,16 +257,32 @@ const handleDelete = async (id) => {
             </div>
           </div>
           <button
-            onClick={() => handleDelete(app.id)}
+            onClick={handleDelete}
             style={{
-              color: "#ff4d4d",
-              background: "transparent",
-              border: "1px solid rgba(255,255,255,0.15)",
-              padding: "8px 12px",
-              borderRadius: "6px",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              marginLeft:"auto",
+              padding: "10px 14px",
+              borderRadius: "8px",
+              border: "1px solid rgb(255, 0, 0)",
+              background: "rgba(255, 80, 80, 0.08)",
+              color: "#c20000",
+              fontSize: "14px",
+              fontWeight: 600,
               cursor: "pointer",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(255, 80, 80, 0.14)";
+              e.currentTarget.style.borderColor = "rgba(255, 80, 80, 0.55)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "rgba(255, 80, 80, 0.08)";
+              e.currentTarget.style.borderColor = "rgba(255, 80, 80, 0.35)";
             }}
           >
+            <Trash2 size={16} />
             Delete
           </button>
           <span style={{
