@@ -66,6 +66,7 @@ descriptions, locations, and notes. Never lose track of where you applied.
 | SimpleJWT | Authentication |
 | Groq AI | AI analysis |
 | PyMuPDF | PDF text extraction |
+| Cloudinary | File storage |
 | Celery + Redis | Background tasks |
 
 ### Frontend
@@ -142,6 +143,9 @@ DEBUG=True
 SECRET_KEY=your-secret-key-here
 DB_PASSWORD=your-postgresql-password
 GROQ_API_KEY=your-groq-api-key
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-secret
 REDIS_URL=redis://localhost:6379/0
 ALLOWED_HOSTS=localhost,127.0.0.1
 CORS_ALLOWED_ORIGINS=http://localhost:5173
